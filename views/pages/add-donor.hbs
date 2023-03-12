@@ -1,23 +1,28 @@
 <div class="container ">
 
+{{#if donor}}  
+
+
+
 <form method="post" action="/add-donor" >
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Full Name</label>
-      <input type="text" class="form-control" id="inputEmail4" placeholder="" name="name">
+      <input type="text" class="form-control" id="inputEmail4" placeholder="" name="name" value="{{donor.name}}" >
     </div>
 
     <div class="form-group col-md-6 mt-2">
-      <label for="inputEmail4">phoneNumber</label>
-      <input type="number" class="form-control" id="inputEmail4" placeholder="" name="phoneNumber">
+      <label for="inputEmail4">PhoneNumber</label>
+      <input type="number" class="form-control" id="inputEmail4" placeholder="" name="phoneNumber"  value="{{donor.phoneNumber}}">
     </div>
 
 
-  <div class="form-row">
+  <div class="form-row mt-2">
         <div class="form-group col-md-4">
       <label for="inputState">Blood Group</label>
       <select id="inputState" class="form-control" name="bloodGroup">
-        <option selected>Choose...</option>
+        <option >{{donor.bloodGroup}}</option>
+        {{!-- <option selected>Choose...</option> --}}
         <option>A+</option>
         <option>A-</option>
         <option>B+</option>
@@ -28,44 +33,47 @@
         <option>O-</option>
       </select>
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6 mt-2 ">
       <label for="inputCity">City</label>
       <input type="text" class="form-control" id="inputCity" name="location">
     </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">Districts</label>
-      <select id="inputState" class="form-control" name="district">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-    </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-4 mt-2">
       <label for="inputState">State</label>
       <select id="inputState" class="form-control" name="state">
-        <option selected>Choose...</option>
-        <option>...</option>
+      <option value="" disabled selected>Select State</option>
+      <option value="kerala">Kerala</option>
+      </select>
       </select>
     </div>
 
-   
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-4 mt-2">
+      <label for="inputState">Districts</label>
+      <select id="inputState" class="form-control" name="district">
+      <option value="" disabled selected >Select District</option>
+      {{#each districts}}
+        <option value="{{this}}">{{this}}</option>
+      {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group col-md-2 mt-4">
       <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip" name="pincode">
+      <input type="text" class="form-control" id="inputZip" min="6" max="6" name="pincode">
     </div>
   
   </div>
 
-   <div class="form-group mt-3 col">
+   <div class="form-group mt-2 col">
     <div class="form-check col">
-      <input class="form-check-input" type="radio" id="gridCheck" name="status">
+      <input class="form-check-input" type="radio" id="gridCheck" name="status" value="true">
       <label class="form-check-label" for="gridCheck">
         I'm a Available Donor
       </label>
     </div>
-      <div class="form-check col">
-      <input class="form-check-input" type="radio" id="gridCheck " name="status">
-      <label class="form-check-label" for="gridCheck">
+      <div class="form-check col mt-2">
+      <input class="form-check-input" type="radio" id="gridCheck " name="status" value="false">
+      <label class="form-check-label" for="gridCheck" >
         I'm a Not Available Donor
       </label>
     </div>
@@ -73,4 +81,8 @@
 
   <button type="submit" class="btn btn-primary mt-4">Update Details</button>
 </form>
+  
+  {{/if}}
+
+
 </div>
