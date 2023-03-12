@@ -19,7 +19,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
 
-    }
+    },
+    donor_id: {
+        type: String,
+        default:null
+    },
 })
 
 module.exports = mongoose.model('user',userSchema)

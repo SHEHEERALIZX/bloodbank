@@ -1,14 +1,45 @@
-<script src="scripts/query.js"></script>
+{{!-- <script src="scripts/query.js"></script> --}}
+<script src="scripts/filter.js"></script>
+<style>
+  select{
+    width: 400px;
+    margin-left: 10px;
+
+  }
+</style>
 <div class="container-fluid mt-3">
     <div class="d-flex align-items-center mb-5 ">
       <form class="d-flex">
-        <input class="form-control me-1" id="myInput" onkeyup="search()" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary " type="submit">Search</button>
+        {{!-- <input class="form-control me-1" id="myInput" type="text" placeholder="Search" aria-label="Search"> --}}
+          <input class="form-control" id="myInput" type="text" placeholder="Search..">
       </form>
+      <div class=" align-items-center ">
+        <form action="">
+          <select name="blood" id="bloodfilter" multiple multiselect-search="true" placeholder="Filter"  >
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+          <input type="submit" value="Filter" class="btn btn-success">
+            <button  class="btn btn-warning" onclick="clearFilter()">
+            Clear Filter
+            </button>
+        </form>
+
       
+       
     </div>
+    </div>
+
+    
+
 <div class="table-responsive">
-<table class="table table-striped "  id="myTable">
+<table class="table table-striped "  id="myTadble">
   <thead>
     <tr class="table-dark">
       <th scope="col">Index</th>
@@ -20,7 +51,7 @@
       <th scope="col">Status</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="myTable">
 {{#each donors}}
   <tr class="">
     <th scope="row"></th>
@@ -46,4 +77,29 @@
 </table>
 </div>
 </div>
+
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+const filter = document.getElementById('bloodfilter');
+filter.addEventListener('click',function(event){
+  console.log(event);
+})
+
+function clearFilter(){
+  window.location.href = "http://localhost:3000/donors";
+}
+  
+</script>
 

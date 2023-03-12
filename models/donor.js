@@ -17,13 +17,13 @@ const donorSchema = new mongoose.Schema({
     
     bloodGroup: {
         type: String,
-        required: true
+        required: false
 
     },
 
     location: {
         type: String,
-        required: true
+        required: false
     },
 
     pincode: {
@@ -33,17 +33,21 @@ const donorSchema = new mongoose.Schema({
     
     district: {
         type: String,
-        required: true
+        required: false
     },
 
     state: {
         type: String,
-        required: true
+        required: false
     },
 
     isAvailable: {
         type: Boolean,
         default: true
+    },
+    isVisible: {
+        type: Boolean,
+        default: false
     }
 
   
